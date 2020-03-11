@@ -1,10 +1,11 @@
 package com.odde;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Order {
-    private List<Product> products = new ArrayList<Product>();
+    private List<Product> products = new ArrayList<>();
     private int id;
 
     public Order(int id) {
@@ -25,5 +26,9 @@ public class Order {
 
     public void AddProduct(Product product) {
         products.add(product);
+    }
+
+    public List<Product> getProducts() {
+        return Collections.unmodifiableList(products);
     }
 }
