@@ -11,6 +11,21 @@ public interface Show<T> {
     return sh.show(t);
   }
 
+  static Show<Orders> ordersAsJson() {
+    return orders -> {
+      StringBuilder sb = new StringBuilder("{\"orders\": [");
+
+      String serializedOrders = orders
+          .getOrders()
+          .stream()
+          .map(order -> show(order, orderAsJson()))
+          .collect(Collectors.joining(", "));
+      sb.append(serializedOrders);
+
+      return sb.append("]}").toString();
+    };
+  }
+
   static Show<Order> orderAsJson() {
     return order -> {
       StringBuilder sb = new StringBuilder();
@@ -19,7 +34,6 @@ public interface Show<T> {
       sb.append(order.getOrderId());
       sb.append(", ");
       sb.append("\"products\": [");
-
 
       String serializedProducts =
           order
@@ -32,8 +46,8 @@ public interface Show<T> {
 
       sb.append("]");
       sb.append("}");
-      return sb.toString();
 
+      return sb.toString();
     };
   }
 
