@@ -11,6 +11,10 @@ public interface Show<T> {
     return sh.show(t);
   }
 
+  static String showOrdersAsJson(Orders orders) {
+    return show(orders, ordersAsJson());
+  }
+
   static Show<Orders> ordersAsJson() {
     return orders -> {
       StringBuilder sb = new StringBuilder("{\"orders\": [");

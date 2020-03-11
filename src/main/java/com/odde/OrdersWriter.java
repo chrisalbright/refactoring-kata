@@ -1,5 +1,7 @@
 package com.odde;
 
+import static com.odde.Show.showOrdersAsJson;
+
 public class OrdersWriter {
   private Orders orders;
 
@@ -8,7 +10,7 @@ public class OrdersWriter {
   }
 
   public String getContents() {
-    return Show.show(orders, Show.ordersAsJson());
+    return showOrdersAsJson(orders);
   }
 
 }
