@@ -2,6 +2,7 @@ package com.odde;
 
 import java.util.stream.Collectors;
 
+import static com.odde.Color.color;
 import static com.odde.Size.forProduct;
 import static com.odde.Size.size;
 
@@ -40,51 +41,31 @@ public interface Show<T> {
 
   static Show<Product> productAsJson() {
 
-    return new Show<Product>() {
+    return product -> {
+      StringBuilder sb = new StringBuilder();
 
-      private String getColorFor(Product product) {
-        switch (product.getColor()) {
-          case 1:
-            return "blue";
-          case 2:
-            return "red";
-          case 3:
-            return "yellow";
-          default:
-            return "no color";
-        }
+      sb.append("{");
+      sb.append("\"code\": \"");
+      sb.append(product.getCode());
+      sb.append("\", ");
+      sb.append("\"color\": \"");
+      sb.append(color(product, Color.forProduct()));
+      sb.append("\", ");
+
+      if (product.getSize() != Product.SIZE_NOT_APPLICABLE) {
+        sb.append("\"size\": \"");
+        sb.append(size(product, forProduct()));
+        sb.append("\", ");
       }
 
-      @Override
-      public String show(Product product) {
-        StringBuilder sb = new StringBuilder();
+      sb.append("\"price\": ");
+      sb.append(product.getPrice());
+      sb.append(", ");
+      sb.append("\"currency\": \"");
+      sb.append(product.getCurrency());
+      sb.append("\"}");
 
-        sb.append("{");
-        sb.append("\"code\": \"");
-        sb.append(product.getCode());
-        sb.append("\", ");
-        sb.append("\"color\": \"");
-        sb.append(getColorFor(product));
-        sb.append("\", ");
-
-        if (product.getSize() != Product.SIZE_NOT_APPLICABLE) {
-          sb.append("\"size\": \"");
-          sb.append(size(product, forProduct()));
-          sb.append("\", ");
-        }
-
-        sb.append("\"price\": ");
-        sb.append(product.getPrice());
-        sb.append(", ");
-        sb.append("\"currency\": \"");
-        sb.append(product.getCurrency());
-        sb.append("\"}");
-
-        return sb.toString();
-      }
-
-      ;
-
+      return sb.toString();
     };
 
   }
