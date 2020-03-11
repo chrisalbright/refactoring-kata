@@ -1,7 +1,6 @@
 package com.odde;
 
 public interface Color<T> {
-  String color(T t);
   static <T> String color(T t, Color<T> color) {
     return color.color(t);
   }
@@ -20,4 +19,6 @@ public interface Color<T> {
       }
     };
   }
+
+  String color(T t);
 }

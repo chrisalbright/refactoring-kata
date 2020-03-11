@@ -5,21 +5,21 @@ import java.util.Collections;
 import java.util.List;
 
 public class Orders {
-    private List<Order> orders = new ArrayList<Order>();
+  private List<Order> orders = new ArrayList<Order>();
 
-    public void AddOrder(Order order) {
-        orders.add(order);
-    }
+  public void AddOrder(Order order) {
+    orders.add(order);
+  }
 
-    public int getOrdersCount() {
-        return orders.size();
-    }
+  public int getOrdersCount() {
+    return orders.size();
+  }
 
-    public Order getOrder(int i) {
-        return orders.get(i);
-    }
+  public Order getOrder(int i) {
+    return orders.get(i);
+  }
 
-    public List<Order> getOrders() {
-        return Collections.unmodifiableList(orders);
-    }
+  public List<Order> getOrders() {
+    return Collections.unmodifiableList(orders);
+  }
 }

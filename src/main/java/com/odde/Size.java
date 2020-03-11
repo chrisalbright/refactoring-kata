@@ -1,8 +1,6 @@
 package com.odde;
 
 public interface Size<T> {
-  String size(T t);
-
   static <T> String size(T t, Size<T> size) {
     return size.size(t);
   }
@@ -27,5 +25,7 @@ public interface Size<T> {
       }
     };
   }
+
+  String size(T t);
 }
 

@@ -6,23 +6,23 @@ import static com.odde.Show.orderAsJson;
 import static com.odde.Show.show;
 
 public class OrdersWriter {
-    private Orders orders;
+  private Orders orders;
 
-    public OrdersWriter(Orders orders) {
-        this.orders = orders;
-    }
+  public OrdersWriter(Orders orders) {
+    this.orders = orders;
+  }
 
-    public String getContents() {
-        StringBuilder sb = new StringBuilder("{\"orders\": [");
+  public String getContents() {
+    StringBuilder sb = new StringBuilder("{\"orders\": [");
 
-        String serializedOrders = orders
-            .getOrders()
-            .stream()
-            .map(order -> show(order, orderAsJson()))
-            .collect(Collectors.joining(", "));
-        sb.append(serializedOrders);
+    String serializedOrders = orders
+        .getOrders()
+        .stream()
+        .map(order -> show(order, orderAsJson()))
+        .collect(Collectors.joining(", "));
+    sb.append(serializedOrders);
 
-        return sb.append("]}").toString();
-    }
+    return sb.append("]}").toString();
+  }
 
 }

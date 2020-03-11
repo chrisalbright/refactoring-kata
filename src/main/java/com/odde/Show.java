@@ -7,8 +7,6 @@ import static com.odde.Size.forProduct;
 import static com.odde.Size.size;
 
 public interface Show<T> {
-  String show(T t);
-
   static <T> String show(T t, Show<T> sh) {
     return sh.show(t);
   }
@@ -69,4 +67,6 @@ public interface Show<T> {
     };
 
   }
+
+  String show(T t);
 }
