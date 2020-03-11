@@ -1,16 +1,15 @@
 package com.odde;
 
-import com.odde.serialize.OrderJsonSerializer;
-
 import java.util.stream.Collectors;
 
+import static com.odde.Show.orderAsJson;
+import static com.odde.Show.show;
+
 public class OrdersWriter {
-    private final OrderJsonSerializer orderSerializer;
     private Orders orders;
 
     public OrdersWriter(Orders orders) {
         this.orders = orders;
-        this.orderSerializer = new OrderJsonSerializer();
     }
 
     public String getContents() {
@@ -19,7 +18,7 @@ public class OrdersWriter {
         String serializedOrders = orders
             .getOrders()
             .stream()
-            .map(orderSerializer::serialize)
+            .map(order -> show(order, orderAsJson()))
             .collect(Collectors.joining(", "));
         sb.append(serializedOrders);
 
